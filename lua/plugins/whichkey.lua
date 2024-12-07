@@ -14,7 +14,7 @@ return {
     local wk = require('which-key')
     wk.setup({
       plugins = {spelling=true},
-      key_labels = {["leader"] = "SPC"},
+      --key_labels = {["leader"] = "SPC"},
     })
   end
 }
