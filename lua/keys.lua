@@ -42,7 +42,7 @@ wk.add({'<leader>cl', function() print(vim.inspect(vim.lsp.buf.list_workspace_fo
 wk.add({ "<leader>cR", function() vim.lsp.buf.references() end, desc = "go to references" })
 wk.add({'<leader>cr', function() vim.lsp.buf.rename() end,desc = "Rename"})
 wk.add({ "<leader>cs", function() vim.lsp.buf.signature_help() end, desc="show signature"})
-wk.add({ "<leader>cO", function() require('telescope.builtin').lsp_type_definitions() end, desc="open type definition"})
+wk.add({ "<leader>cO", function() require("telescope.builtin").lsp_dynamic_workspace_symbols() end, desc="open workspace symbols"})
 wk.add({ "<leader>cf", function() vim.lsp.buf.format() end, desc = "format buffer" })
 wk.add({'<leader>cX', function() vim.lsp.buf.remove_workspace_folder() end, desc = "remove workspace folder"})
 
@@ -56,7 +56,7 @@ wk.add({ "<leader>fh", function() require('telescope.builtin').find_files({ cwd 
 wk.add({ "<leader>fp", function()
     local cwd = require("project_nvim.project").get_project_root()
     require('telescope.builtin').find_files({ cwd = cwd })
-  end,
+ end,
   desc = "find file in project dir" })
 wk.add({ "<leader>fc", function() require('telescope.builtin').find_files({ cwd = "/Users/tom/.config" }) end, desc = "find file in .config dir" })
 wk.add({ "<leader>fm", function()

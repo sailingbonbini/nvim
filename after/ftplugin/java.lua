@@ -11,6 +11,7 @@ local workspace_folder = workspace_dir .. vim.fn.fnamemodify(root_dir, ":p:h:t")
 
 local on_attach = function(client, bufnr)
   keys.configure_java_keys(client, bufnr)
+  require('jdtls').setup_dap({hotcodereplace = 'auto'})
 end
 
 local config = {
@@ -116,6 +117,12 @@ local config = {
     -- Use the workspace_folder defined above to store data for this project
     '-data', workspace_folder,
   },
+  -- need the microsoft java_debug adapter for nvim_dap
+  init_options = {
+    bundles = {
+      vim.fn.glob("/opt/homebrew/Cellar/jdtls/1.42.0/libexec/plugins/com.microsoft.java.debug.plugin-0.53.1.jar")
+    };
+  }
 }
 
 -- Finally, start jdtls. This will run the language server using the configuration we specified,
