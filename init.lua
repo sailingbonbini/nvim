@@ -84,3 +84,7 @@ later(function() add({source = 'mbbill/undotree'}) end)
 now(function()
   require('completion').setup()
 end)
+
+now(function()
+  require('snippets').setup()
+end)
