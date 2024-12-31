@@ -86,7 +86,7 @@ M.setup = function()
   set_highlight('@variable', { fg = colors.text })
   set_highlight('@variable.builtin', { fg = colors.text, italic = true })
   -- cursor colors
-  vim.o.guicursor = "n-v-c:block,i:block-CursorInsert"
+  vim.o.guicursor = "n-v-c:block,i:ver10-CursorInsert"
   vim.api.nvim_set_hl(0, "Cursor", { bg = colors.cursor_normal, fg = "white" })
   vim.api.nvim_set_hl(0, "CursorInsert", { bg = colors.cursor_insert, fg = "white" }) 
 end
