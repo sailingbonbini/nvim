@@ -1,6 +1,6 @@
 local jdtls = require('jdtls')
 
-local jdtls_path = '/opt/homebrew/Cellar/jdtls/1.42.0'
+local jdtls_path = '/opt/homebrew/Cellar/jdtls/1.44.0'
 local workspace_dir = '/Users/tom/jdtls-workspaces/'
 
 local root_markers = {'gradlew', 'mvnw', '.git'}
@@ -16,6 +16,9 @@ local on_attach = function(client, bufnr)
   -- we need this to stop the lsp from providing syntax hihlighting symbols
   -- as we want to leave that up to TreeSitter
   client.server_capabilities.semanticTokensProvider = nil
+
+  -- set up our java helpers
+  require('javahelpers').setup()
 end
 
 local config = {

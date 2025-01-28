@@ -92,7 +92,6 @@ end
 function M.find_marker(path, root_markers, stop_dir)
   local search_path = path .. ';' .. stop_dir
   local found_dir = nil;
-  
   for _, root_marker in ipairs(root_markers) do
     if string.match(root_marker, '$/') then
       -- do nothing: directory
@@ -123,11 +122,10 @@ function M.path_relative_to(file, root_dir, stop_dir)
   file = file or vim.loop.fs_realpath(vim.fn.expand('%:p'))
   stop_dir = stop_dir or M.config.stop_dir
   root_dir = root_dir or M.find_marker(file, M.config.project_root_markers, stop_dir)
-  
-  if root_dir == nill or root_dir == "" then
+  if root_dir == nil or root_dir == "" then
     vim.notify("No root dir found for file " .. file, vim.log.levels.INFO)
   else
-    from, to = string.find(file, root_dir)
+    local _, to = string.find(file, root_dir)
     local relative_path = string.sub(file, to + 1)
     log("Working file path: " .. file)
     print("Found " .. relative_path .. " !!!")

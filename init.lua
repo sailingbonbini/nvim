@@ -16,24 +16,6 @@ require('mini.deps').setup({ path = { package = path_package } })
 -- startup and are optional.
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
--- [[set useful defaults]]
-now(function() require('settings').setup() end)
-
--- set keys
-now(function() require('keys').setup() end)
-
--- install mini.notify
-now(function() require('notifications').setup() end)
-
--- mini.icons
-now(function() require('mini.icons').setup() end)
-
--- set color scheme
-now(function() require('colorscheme').setup() end)
-
--- mini files
-now(function() require('files').setup() end)
-
 -- mini.statusline
 now(function() require('mini.statusline').setup() end)
 
@@ -80,6 +62,24 @@ later(function() add({source = 'ii14/neorepl.nvim'}) end)
 -- undotree
 later(function() add({source = 'mbbill/undotree'}) end)
 
+-- [[set useful defaults]]
+now(function() require('settings').setup() end)
+
+-- set keys
+now(function() require('keys').setup() end)
+
+-- install mini.notify
+now(function() require('notifications').setup() end)
+
+-- mini.icons
+now(function() require('mini.icons').setup() end)
+
+-- set color scheme
+now(function() require('colorscheme').setup() end)
+
+-- mini files
+now(function() require('files').setup() end)
+
 -- mini completion
 now(function()
   require('completion').setup()
@@ -88,3 +88,5 @@ end)
 now(function()
   require('snippets').setup()
 end)
+
+

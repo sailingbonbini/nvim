@@ -3,6 +3,36 @@ local pathetic = require('pathetic')
 
 local M = {}
 
+function M.setup()
+
+  vim.api.nvim_create_user_command("JH",
+    function(opts)
+      local args = vim.split(opts.args, " ")
+      if #args < 2 then
+        print ("Usage: JH [create|...] [class|interface|record]")
+        return
+      end
+      local command = args[1]
+      local subcommand = args[2]
+
+      if command == "create" and subcommand == "class" then
+        M.create_type(M.write_java_class)
+      elseif command == "create" and subcommand == "interface" then
+        M.create_type(M.write_java_interface)
+      elseif command == "create" and subcommand == "record" then
+        M.create_type(M.write_java_record)
+      else
+        print("Not yet implemented. command=" .. command .. ", subcommand=" ..subcommand)
+        return
+      end
+    end,
+    {
+      nargs = "*",
+      desc = "Java helpers"
+    }
+  )
+end
+
 -- get user input with a prompt
 function M.get_user_input(prompt)
   local result = ""
@@ -92,32 +122,6 @@ function M.create_type(template_fn)
   end
 end
 
-vim.api.nvim_create_user_command("JH",
-  function(opts)
-    local args = vim.split(opts.args, " ")
-    if #args < 2 then
-      print ("Usage: JH [create|...] [class|interface|record]")
-      return
-    end
-    local command = args[1]
-    local subcommand = args[2]
-
-    if command == "create" and subcommand == "class" then
-      M.create_type(M.write_java_class)
-    elseif command == "create" and subcommand == "interface" then
-      M.create_type(M.write_java_interface)
-    elseif command == "create" and subcommand == "record" then
-      M.create_type(M.write_java_record)
-    else
-      print("Not yet implemented. command=" .. command .. ", subcommand=" ..subcommand)
-      return
-    end
-  end,
-  {
-    nargs = "*",
-    desc = "Java helpers"
-  }
-)
 
 
 -- Run the main function

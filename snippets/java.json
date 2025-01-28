@@ -172,5 +172,12 @@
         "}"
       ],
       "description":"Class file"
+    },
+    "logger": {
+      "prefix": "logger",
+      "body": [
+        "private final static Logger log = LoggerFactory.getLogger(${TM_FILENAME_BASE}.class);"
+      ],
+      "description":"Logger instance"
     }
 }

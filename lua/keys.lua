@@ -31,7 +31,7 @@ local global_mappings = function()
   nl('u', vim.cmd.UndotreeToggle, 'Toggle undo tree' )
 
   --
-  tl('<Esc><Esc>','<C-\\><C-n>', 'Escape terminal mode')
+  tl('<Esc>','<C-\\><C-n>', 'Escape terminal mode')
   --
   -- make C-d scroll down half a page and set the cursor in the middle row
   vim.keymap.set('n', '<C-d>', '<C-d>zz')
@@ -64,6 +64,7 @@ local code_mappings = function()
   nl('ci', '<Cmd>lua vim.lsp.buf.implementation()<CR>', 'Go to implementation') -- Go to implementation
   nl('ca', '<Cmd>lua vim.lsp.buf.code_action()<CR>', 'Code action') -- Code action
   nl('cf', '<Cmd>lua vim.lsp.buf.format({ async = true })<CR>', 'Format document') -- Format document
+  nl('co', "<Cmd>lua MiniExtra.pickers.lsp({ scope = 'document_symbol'}) <CR>", 'Show outline') -- Show outline
   nl('cs', '<Cmd>lua vim.lsp.buf.signature_help()<CR>', 'Show signature help') -- Show signature help
   nl('ct', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', 'Go to type definition') -- Go to type definition
   nl('cn', '<Cmd>lua vim.lsp.buf.rename()<CR>', 'Rename symbol') -- Rename symbol
