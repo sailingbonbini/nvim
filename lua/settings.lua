@@ -38,8 +38,10 @@ M.setup = function()
   opt.splitbelow = true            -- bool: Place new
 
   -- make sure vim opens folds automativally
+  vim.o.foldcolumn = '1'
   vim.o.foldlevel = 99
-  vim.o.foldlevelstart = 99 
+  vim.o.foldlevelstart = 99
+  vim.o.foldenable = true
 
   -- [[ Make yank copy to the system clipboard ]] 
   vim.api.nvim_set_option("clipboard","unnamed")
@@ -67,8 +69,6 @@ M.setup = function()
     pattern = "*.xhtml",
     command = "setfiletype html"
   })
-
-
 end
 
 return M

@@ -10,8 +10,8 @@ if not vim.loop.fs_stat(mini_path) then
 end
 
 -- Set up 'mini.deps' 
-require('mini.deps').setup({ path = { package = path_package } })
-
+MiniDeps = require('mini.deps')
+MiniDeps.setup({ path = { package = path_package } })
 -- Use 'mini.deps'. `now()` and `later()` are helpers for a safe two-stage
 -- startup and are optional.
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
@@ -20,7 +20,7 @@ local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 now(function() require('mini.statusline').setup() end)
 
 -- add treesitter
-now(function() 
+now(function()
   add({
     source = 'nvim-treesitter/nvim-treesitter',
     -- Use 'master' while monitoring updates in 'main'
@@ -32,7 +32,7 @@ now(function()
   add({
     source = 'nvim-treesitter/playground'
   })
-  require('treesitter').setup() 
+  require('treesitter').setup()
 end)
 
 -- mini.git to display git diffs etc
@@ -48,10 +48,10 @@ now(function() add({ source = 'mfussenegger/nvim-jdtls'}) end)
 now(function() add({ source = 'mfussenegger/nvim-dap'}) end)
 
 -- mini.pick pickers
-now(function() require('mini.pick').setup() end)
+later(function() require('mini.pick').setup() end)
 
 -- mini extra pickers
-now(function() require('mini.extra').setup() end)
+later(function() require('mini.extra').setup() end)
 
 -- vim be good game
 later(function() add({source = 'ThePrimeagen/vim-be-good'}) end)
@@ -66,10 +66,13 @@ later(function() add({source = 'mbbill/undotree'}) end)
 now(function() require('settings').setup() end)
 
 -- set keys
-now(function() require('keys').setup() end)
+later(function() require('keys').setup() end)
 
 -- install mini.notify
-now(function() require('notifications').setup() end)
+now(function()
+  add('echasnovski/mini.notify')
+  require('notifications').setup()
+end)
 
 -- mini.icons
 now(function() require('mini.icons').setup() end)
@@ -78,15 +81,57 @@ now(function() require('mini.icons').setup() end)
 now(function() require('colorscheme').setup() end)
 
 -- mini files
-now(function() require('files').setup() end)
+later(function() require('files').setup() end)
 
 -- mini completion
-now(function()
+later(function()
   require('completion').setup()
 end)
 
-now(function()
+-- snippets
+later(function()
   require('snippets').setup()
 end)
 
+-- pairs
+later(function()
+  require('mini.pairs').setup()
+end)
 
+-- go to with brackets
+later(function()
+  require('mini.bracketed').setup()
+end)
+
+-- obsidian nvim
+now(function()
+  add({
+    source = "/Users/tom/projects/obsidian.nvim",
+    name = "obsidian-nvim",
+    depends = {"nvim-lua/plenary.nvim",},
+  })
+  require('obsconfig').setup()
+end)
+
+-- obtask
+now(function()
+  -- In your init.lua or separate dev config
+  vim.opt.runtimepath:append("~/projects/obtask.nvim")
+  require("obtask").setup()
+
+  function Reload_module(name)
+    package.loaded[name] = nil
+    return require(name)
+  end
+end)
+
+-- ufo for folding
+later(function()
+  add({
+    source = 'kevinhwang91/nvim-ufo',
+    depends = {
+      'kevinhwang91/promise-async'
+    }
+  })
+  require('folding').setup()
+end)

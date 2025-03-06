@@ -59,87 +59,39 @@ end
 local code_mappings = function()
   nl("cc", "<Cmd>lua require('codesearch').pick_type_definitions()<CR>", "Find class") -- find class
   nl('cd', '<Cmd>lua vim.lsp.buf.definition()<CR>', 'Go to definition') -- Go to definition
-  nl('cD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', 'Go to declaration') -- Go to declaration
   nl('ch', '<Cmd>lua vim.lsp.buf.hover()<CR>', 'Hover documentation') -- Hover documentation
   nl('ci', '<Cmd>lua vim.lsp.buf.implementation()<CR>', 'Go to implementation') -- Go to implementation
   nl('ca', '<Cmd>lua vim.lsp.buf.code_action()<CR>', 'Code action') -- Code action
   nl('cf', '<Cmd>lua vim.lsp.buf.format({ async = true })<CR>', 'Format document') -- Format document
   nl('co', "<Cmd>lua MiniExtra.pickers.lsp({ scope = 'document_symbol'}) <CR>", 'Show outline') -- Show outline
   nl('cs', '<Cmd>lua vim.lsp.buf.signature_help()<CR>', 'Show signature help') -- Show signature help
-  nl('ct', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', 'Go to type definition') -- Go to type definition
+  nl('ct', '<Cmd>JH search type<CR>', 'Search types') -- Go to type definition
   nl('cn', '<Cmd>lua vim.lsp.buf.rename()<CR>', 'Rename symbol') -- Rename symbol
-  nl('cpd', function()
-    local_opts = {
-      scope = "definition"
-    }
-    opts={}
-    MiniExtra.pickers.lsp(local_opts, opts)
-  end, 'Pick definitions' )
-  nl('cpD', function()
-    local_opts = {
-      scope = "declaration"
-    }
-    opts={}
-    MiniExtra.pickers.lsp(local_opts, opts)
-  end, 'Pick declarations' )
-  nl('cps', function()
-    local_opts = {
-      scope = "document_symbol"
-    }
-    opts={}
-    MiniExtra.pickers.lsp(local_opts, opts)
-  end, 'Pick document symbol' )
-  nl('cpi', function()
-    local_opts = {
-      scope = "implementation"
-    }
-    opts={}
-    MiniExtra.pickers.lsp(local_opts, opts)
-  end, 'Pick implementation' )
-  nl('cpr', function()
-    local_opts = {
-      scope = "references"
-    }
-    opts={}
-    MiniExtra.pickers.lsp(local_opts, opts)
-  end, 'Pick references' )
-  nl('cpt', function()
-    local_opts = {
-      scope = "type_definition"
-    }
-    opts={}
-    MiniExtra.pickers.explorer(local_opts, opts)
-  end, 'Pick type definition' )
-  nl('cpw', function()
-    local_opts = {
-      scope = "workspace_symbol"
-    }
-    opts={}
-    MiniExtra.pickers.lsp(local_opts, opts)
-  end, 'Pick workspace symbol' )
 end
 
 -- File mappings
 local file_mappings = function()
   nl('fe', '<Cmd>lua require(\'mini.files\').open()<CR>', 'Explore' )
   nl('fh', function()
-    opts= { source = { cwd = "/Users/tom/" } }
-    MiniPick.builtin.files(opts, opts)
+    local opts= { source = { cwd = "/Users/tom/" } }
+    require('mini.pick').builtin.files(opts, opts)
   end, 'Home directory' )
   nl('fp', function()
-    local_opts = {
+    local local_opts = {
       cwd = vim.fn.expand('~/projects')
     }
-    opts={}
-    MiniPick.builtin.files(local_opts, opts)
-  end, 'Home directory' )
+    local opts={}
+    require('mini.pick').builtin.files(local_opts, opts)
+  end, 'Project directory' )
   nl('fr', function()
-    local_opts = {}
-    opts={}
-    MiniExtra.pickers.oldfiles(local_opts, opts)
+    local local_opts = {}
+    local opts={}
+    require('mini.extra').pickers.oldfiles(local_opts, opts)
   end, 'Recent files' )
+  nl ('fg', function()
+    require('mini.pick').builtin.grep_live({source = { command= 'rg --vimgrep --smart-case --hidden '}})
+  end, 'Grep')
   nl('ff', '<Cmd>lua MiniPick.builtin.files()<CR>', 'File picker')
-
 end
 
 --window mappings
