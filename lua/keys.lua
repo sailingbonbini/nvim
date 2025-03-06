@@ -38,6 +38,15 @@ local global_mappings = function()
   -- make C-u scroll up half a page and set the cursor in the middle row
   vim.keymap.set('n', '<C-u>', '<C-u>zz')
 
+  vim.keymap.set('n', 'zz', function()
+    local ufo = require('ufo')
+    local winid = ufo.peekFoldedLinesUnderCursor()
+    if not winid then
+      ufo.closeFoldsWith(1)  -- Close level 1 folds (functions)
+    else
+      ufo.openFoldsUnderCursor()
+    end
+  end)
 end
 
 -- buffer mappings

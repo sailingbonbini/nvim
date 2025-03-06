@@ -42,13 +42,19 @@ M.setup = function()
   vim.o.foldlevel = 99
   vim.o.foldlevelstart = 99
   vim.o.foldenable = true
+  vim.opt.fillchars = {
+    foldopen = '▾',
+    foldclose = '▸',
+    foldsep = ' ',
+    fold = '⠀',  -- U+2800 Braille blank
+  }
 
   -- [[ Make yank copy to the system clipboard ]] 
   vim.api.nvim_set_option("clipboard","unnamed")
 
   -- [[ use tree sitter for code folding ]]
-  opt.foldmethod = "expr"
-  opt.foldexpr = "nvim_treesitter#foldexpr()"
+  --opt.foldmethod = "expr"
+  --opt.foldexpr = "nvim_treesitter#foldexpr()"
 
   -- [[ make sure python indent is 2 spaces ]]
   vim.cmd(" autocmd FileType python set shiftwidth=2 tabstop=2 expandtab")
