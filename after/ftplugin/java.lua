@@ -1,6 +1,6 @@
 local jdtls = require('jdtls')
 
-local jdtls_path = '/opt/homebrew/Cellar/jdtls/1.44.0'
+local jdtls_path = '/opt/homebrew/Cellar/jdtls/1.45.0/'
 local workspace_dir = '/Users/tom/jdtls-workspaces/'
 
 local root_markers = {'gradlew', 'mvnw', '.git'}
@@ -116,7 +116,7 @@ local config = {
 
     -- The jar file is located where jdtls was installed. This will need to be updated
     -- to the location where you installed jdtls
-    '-jar', jdtls_path .. '/libexec/plugins/org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar',
+    '-jar', jdtls_path .. '/libexec/plugins/org.eclipse.equinox.launcher_1.6.1000.v20250131-0606.jar',
 
     -- The configuration for jdtls is also placed where jdtls was installed. This will
     -- need to be updated depending on your environment

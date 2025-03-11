@@ -106,11 +106,11 @@ end)
 -- obsidian nvim
 now(function()
   add({
-    source = "/Users/tom/projects/obsidian.nvim",
-    name = "obsidian-nvim",
-    depends = {"nvim-lua/plenary.nvim",},
+    source = "nvim-lua/plenary.nvim",
+    name = "plenary.nvim",
   })
-  require('obsconfig').setup()
+	vim.opt.runtimepath:append("~/projects/obsidian.nvim")
+	require('obsconfig').setup()
 end)
 
 -- obtask
@@ -134,5 +134,13 @@ later(function()
     }
   })
   require('folding').setup()
+end)
+
+-- status column
+later(function()
+  add({
+    source = 'luukvbaal/statuscol.nvim',
+  })
+  require('scol').setup()
 end)
 

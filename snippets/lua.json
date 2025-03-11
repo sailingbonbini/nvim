@@ -1,0 +1,7 @@
+{
+	"debug": {
+      "prefix": "debug",
+      "body": "M.log.debug(${0})",
+      "description":"debug"
+  }
+}
